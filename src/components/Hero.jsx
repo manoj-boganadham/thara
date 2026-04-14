@@ -13,6 +13,7 @@ function Hero() {
           Together with their families invite you to celebrate their wedding
         </p>
       </div>
+      <div className="hero-overlay-bottom" />
       <div className="scroll-hint">
         <span>Scroll</span>
         <div className="scroll-arrow" />

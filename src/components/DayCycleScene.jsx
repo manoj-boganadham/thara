@@ -285,8 +285,9 @@ function DayCycleScene() {
     handleFirstInteraction();
   }, [handleFirstInteraction]);
 
+  // Taller viewBox for full-screen background — ground at bottom, sky fills most of the space
   const SVG_W = 800;
-  const SVG_H = 450;
+  const SVG_H = 1000;
 
   const sunPos = getArcPosition(progress, SVG_W, SVG_H);
   const skyColors = getSkyColors(progress);
@@ -345,6 +346,7 @@ function DayCycleScene() {
       <svg
         ref={svgRef}
         viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+        preserveAspectRatio="none"
         className="day-cycle-svg"
         xmlns="http://www.w3.org/2000/svg"
         onClick={handleSvgClick}
@@ -452,11 +454,11 @@ function DayCycleScene() {
           ))}
         </g>
 
-        {/* Arc path (subtle guide line) */}
+        {/* Arc path (very subtle guide line) */}
         <path
           d={arcPathD}
           fill="none"
-          stroke="rgba(255,255,255,0.15)"
+          stroke="rgba(255,255,255,0.05)"
           strokeWidth="1"
           strokeDasharray="6,6"
         />
