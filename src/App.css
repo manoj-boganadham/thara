@@ -1,0 +1,590 @@
+/* ========== Day Cycle Scene ========== */
+.day-cycle-scene {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.day-cycle-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Stars twinkle */
+.star {
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+/* Birds fly */
+.bird {
+  animation: fly 4s ease-in-out infinite;
+}
+
+@keyframes fly {
+  0%, 100% {
+    transform: translateY(0) scaleX(1);
+  }
+  25% {
+    transform: translateY(-3px) scaleX(0.9);
+  }
+  50% {
+    transform: translateY(0) scaleX(1);
+  }
+  75% {
+    transform: translateY(-2px) scaleX(0.95);
+  }
+}
+
+/* Chimney smoke */
+.smoke-1 {
+  animation: smokeRise 3s ease-out infinite;
+}
+.smoke-2 {
+  animation: smokeRise 3s ease-out 1s infinite;
+}
+.smoke-3 {
+  animation: smokeRise 3s ease-out 2s infinite;
+}
+
+@keyframes smokeRise {
+  0% {
+    opacity: 0.5;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15px) scale(1.8);
+  }
+}
+
+/* Drag hint */
+.drag-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  animation: hintPulse 2s ease-in-out infinite, hintFadeIn 0.5s ease-out forwards;
+  z-index: 5;
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+
+.drag-hint-dark {
+  background: rgba(15, 26, 46, 0.85);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.drag-hint-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 0.3px;
+  transition: color 0.4s ease;
+}
+
+.drag-hint-dark .drag-hint-text {
+  color: #e8e0d8;
+}
+
+.drag-hint-sub {
+  font-size: 0.6rem;
+  color: #888;
+  transition: color 0.4s ease;
+}
+
+.drag-hint-dark .drag-hint-sub {
+  color: #8a8078;
+}
+
+@keyframes hintPulse {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+@keyframes hintFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========== Hero Section ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  padding-top: 3rem;
+  position: relative;
+  overflow: hidden;
+  gap: 1.5rem;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+.hero-names {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.hero-names .heart {
+  color: var(--accent);
+  display: inline-block;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--text-light);
+  max-width: 420px;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  margin: 1.5rem auto;
+  opacity: 0.6;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 1.5s forwards;
+}
+
+.scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: rotate(45deg);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* ========== Countdown Section ========== */
+.countdown-section {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  background-color: var(--bg);
+  transition: background-color 0.4s ease;
+  position: relative;
+}
+
+.countdown-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: rgba(212, 175, 55, 0.04);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.countdown-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.countdown-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.countdown-boxes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.countdown-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.countdown-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.countdown-value {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.countdown-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ========== Events Section ========== */
+.events-section {
+  padding: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-divider {
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
+  margin: 0 auto 2.5rem;
+  border-radius: 2px;
+}
+
+/* ========== Event Card ========== */
+.event-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.event-card-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.event-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.event-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.event-detail-icon {
+  color: var(--accent);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.event-detail-text {
+  line-height: 1.5;
+}
+
+.event-venue {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+.event-card-divider {
+  width: 30px;
+  height: 1px;
+  background: var(--border);
+  margin: 1.2rem auto;
+}
+
+.location-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  padding: 0.7rem 1.6rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.location-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+}
+
+.location-btn:active {
+  transform: translateY(0);
+}
+
+.location-btn-icon {
+  font-size: 1rem;
+}
+
+/* ========== Footer Section ========== */
+.footer {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: var(--bg);
+  transition: background-color 0.4s ease;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: rgba(212, 175, 55, 0.04);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer-text {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.footer-text .heart {
+  color: var(--accent);
+}
+
+.footer-names {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  letter-spacing: 1px;
+}
+
+/* ========== Scroll Animations ========== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== Keyframes ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: rotate(45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(45deg) translateY(6px);
+  }
+}
+
+/* ========== Responsive (Mobile-First) ========== */
+
+/* Mobile base sizes (small phones) */
+.hero-names {
+  font-size: 2rem;
+}
+
+.hero-subtitle {
+  font-size: 0.9rem;
+}
+
+.countdown-boxes {
+  gap: 0.75rem;
+}
+
+.countdown-box {
+  min-width: 70px;
+  padding: 1rem 0.8rem;
+}
+
+.countdown-value {
+  font-size: 1.8rem;
+}
+
+.countdown-label {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+}
+
+.event-card {
+  padding: 1.5rem 1.2rem;
+}
+
+.event-card-title {
+  font-size: 1.3rem;
+}
+
+.section-heading {
+  font-size: 1.3rem;
+}
+
+/* Tablets and up (≥ 480px) */
+@media (min-width: 480px) {
+  .hero-names {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .countdown-boxes {
+    gap: 1rem;
+  }
+
+  .countdown-box {
+    min-width: 80px;
+    padding: 1.2rem 1rem;
+  }
+
+  .countdown-value {
+    font-size: 2.2rem;
+  }
+
+  .event-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .event-card-title {
+    font-size: 1.4rem;
+  }
+
+  .section-heading {
+    font-size: 1.6rem;
+  }
+}
+
+/* Desktop and up (≥ 768px) */
+@media (min-width: 768px) {
+  .hero-names {
+    font-size: 3.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .countdown-box {
+    min-width: 100px;
+    padding: 1.5rem 1.2rem;
+  }
+
+  .countdown-value {
+    font-size: 2.8rem;
+  }
+
+  .countdown-boxes {
+    gap: 1.5rem;
+  }
+
+  .event-card {
+    padding: 2.5rem 2rem;
+  }
+
+  .section-heading {
+    font-size: 2rem;
+  }
+
+  .countdown-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+  }
+}
