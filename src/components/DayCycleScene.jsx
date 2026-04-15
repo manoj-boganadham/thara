@@ -236,13 +236,13 @@ function DayCycleScene() {
   }, [hasInteracted]);
 
   // Drag handlers — attach move/up to window so dragging works outside the sun element
-  const handlePointerDown = useCallback((e) => {
-    e.preventDefault();
+  const handlePointerDown = useCallback(() => {
     isDragging.current = true;
     handleFirstInteraction();
 
     const onMove = (ev) => {
       if (!isDragging.current || !svgRef.current) return;
+      ev.preventDefault(); // prevent scroll while dragging the sun/moon
       const svg = svgRef.current;
       const rect = svg.getBoundingClientRect();
       const x = ev.clientX - rect.left;
@@ -350,7 +350,7 @@ function DayCycleScene() {
         className="day-cycle-svg"
         xmlns="http://www.w3.org/2000/svg"
         onClick={handleSvgClick}
-        style={{ touchAction: 'none' }}
+        style={{ touchAction: 'pan-y' }}
       >
         <defs>
           {/* Moon mask - creates crescent by covering part of the circle */}

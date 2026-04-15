@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-const WEDDING_DATE = new Date('2026-05-01T11:20:00+05:30');
-
-function calculateTimeLeft() {
+function calculateTimeLeft(targetDate) {
   const now = new Date();
-  const diff = WEDDING_DATE - now;
+  const diff = targetDate - now;
 
   if (diff <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -18,16 +16,17 @@ function calculateTimeLeft() {
   };
 }
 
-function Countdown() {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
+function Countdown({ targetDate, dateLabel }) {
+  const weddingDate = useMemo(() => new Date(targetDate), [targetDate]);
+  const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(weddingDate));
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      setTimeLeft(calculateTimeLeft(weddingDate));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [weddingDate]);
 
   const units = [
     { value: timeLeft.days, label: 'Days' },
@@ -38,8 +37,8 @@ function Countdown() {
 
   return (
     <section className="countdown-section fade-in" id="countdown">
-      <h2 className="countdown-title">Counting Down to Our Day</h2>
-      <p className="countdown-subtitle">May 1, 2026 • 11:20 AM</p>
+      <h2 className="countdown-title">Counting Down To Our Special Day</h2>
+      <p className="countdown-subtitle">{dateLabel}</p>
       <div className="countdown-boxes">
         {units.map((unit) => (
           <div className="countdown-box" key={unit.label}>

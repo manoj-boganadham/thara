@@ -7,17 +7,19 @@
 }
 
 :root {
-  --bg: #fdf6f0;
+  --bg: #f7efe3;
   --accent: #D4AF37;
   --accent-light: rgba(212, 175, 55, 0.15);
   --accent-hover: #c9a22e;
   --text: #333;
   --text-light: #666;
   --text-muted: #999;
-  --card-bg: #ffffff;
+  --card-bg: rgba(255, 250, 241, 0.88);
   --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   --card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.1);
   --border: rgba(212, 175, 55, 0.2);
+  --paper-dark: #ead8be;
+  --paper-light: #fff7eb;
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Poppins', system-ui, sans-serif;
 }
@@ -31,15 +33,33 @@ body {
   font-family: var(--font-body);
   color: var(--text);
   background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 10% 8%, rgba(212, 175, 55, 0.2) 0, transparent 22%),
+    radial-gradient(circle at 90% 92%, rgba(212, 175, 55, 0.16) 0, transparent 24%),
+    linear-gradient(180deg, var(--paper-light) 0%, var(--bg) 55%, var(--paper-dark) 100%);
+  background-attachment: fixed;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image:
+    linear-gradient(90deg, rgba(140, 90, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(140, 90, 0, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
 /* Only apply transitions after initial load to prevent flash */
 body.theme-ready {
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.4s ease, color 0.4s ease, background-image 0.4s ease;
 }
 
 #root {
