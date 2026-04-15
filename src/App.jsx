@@ -9,25 +9,151 @@ import StorySection from './components/StorySection';
 import WhenWhereSection from './components/WhenWhereSection';
 import ShareSection from './components/ShareSection';
 import OpeningPrelude from './components/OpeningPrelude';
+import MusicToggle from './components/MusicToggle';
+import backgroundMusic from './assets/background-music.mp3';
 import invitationData from './data/invitationData';
 import './App.css';
 
-function LandingPage() {
-  const [isEntering, setIsEntering] = useState(false);
-  const audioRef = useRef(null);
+const MUSIC_MUTED_STORAGE_KEY = 'musicMuted';
+const MUSIC_LOOP_START_SECONDS = 21;
+
+function LandingPage({ isEntering, onEnter }) {
+  return (
+    <OpeningPrelude
+      opening={invitationData.opening}
+      onEnter={onEnter}
+      isEntering={isEntering}
+    />
+  );
+}
+
+function InvitationPage({ isMusicMuted, onToggleMusic }) {
+  return (
+    <main className="main-invite-visible invitation-theme">
+      <Hero invitation={invitationData} />
+
+      <section className="post-hero-intro fade-in" id="intro-details">
+        <div className="post-hero-intro-inner">
+          <p className="post-hero-venue">{invitationData.ceremony.venueLabel}</p>
+          <p className="post-hero-quote">"{invitationData.quote}"</p>
+        </div>
+      </section>
+
+      <Countdown
+        targetDate={invitationData.ceremony.isoDate}
+        dateLabel={`${invitationData.ceremony.dateLabel} • ${invitationData.ceremony.timeLabel}`}
+      />
+
+      <AboutCouple couple={invitationData.couple} />
+
+      <EventsTimeline events={invitationData.events} />
+
+      <GallerySection items={invitationData.galleryPlaceholders} />
+      <StorySection story={invitationData.story} />
+      <WhenWhereSection ceremony={invitationData.ceremony} />
+      <ShareSection
+        shareText={invitationData.share.whatsappText}
+        coupleNames={`${invitationData.couple.bride.name} & ${invitationData.couple.groom.name}`}
+      />
+
+      <footer className="footer">
+        <p className="footer-text">{invitationData.footerMessage}</p>
+        <p className="footer-names">
+          {invitationData.couple.bride.name} &amp; {invitationData.couple.groom.name}
+        </p>
+      </footer>
+
+      <MusicToggle isMuted={isMusicMuted} onToggle={onToggleMusic} />
+    </main>
+  );
+}
+
+function App() {
+  const location = useLocation();
   const navigate = useNavigate();
+  const [isEntering, setIsEntering] = useState(false);
+  const [isMusicMuted, setIsMusicMuted] = useState(() => {
+    return localStorage.getItem(MUSIC_MUTED_STORAGE_KEY) === 'true';
+  });
+  const musicRef = useRef(null);
+  const chimeAudioRef = useRef(null);
+
+  useEffect(() => {
+    // Enable theme transitions after initial paint to prevent flash
+    const readyTimer = setTimeout(() => {
+      document.body.classList.add('theme-ready');
+    }, 100);
+
+    return () => clearTimeout(readyTimer);
+  }, []);
+
+  useEffect(() => {
+    const audio = new Audio(backgroundMusic);
+    audio.loop = false;
+    audio.volume = 0.2;
+    audio.preload = 'auto';
+    audio.currentTime = MUSIC_LOOP_START_SECONDS;
+
+    const handleEnded = () => {
+      audio.currentTime = MUSIC_LOOP_START_SECONDS;
+      if (!audio.muted) {
+        audio.play().catch(() => {});
+      }
+    };
+    audio.addEventListener('ended', handleEnded);
+    musicRef.current = audio;
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.pause();
+      audio.src = '';
+      musicRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname !== '/invitation') {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!musicRef.current) {
+      return;
+    }
+    musicRef.current.muted = isMusicMuted;
+    localStorage.setItem(MUSIC_MUTED_STORAGE_KEY, String(isMusicMuted));
+  }, [isMusicMuted]);
 
   const playChimeIfAvailable = () => {
     const source = invitationData.opening.chimeSrc;
 
     if (source) {
       try {
-        if (!audioRef.current) {
-          audioRef.current = new Audio(source);
-          audioRef.current.preload = 'auto';
+        if (!chimeAudioRef.current) {
+          chimeAudioRef.current = new Audio(source);
+          chimeAudioRef.current.preload = 'auto';
         }
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(() => {});
+        chimeAudioRef.current.currentTime = 0;
+        chimeAudioRef.current.play().catch(() => {});
         return;
       } catch {
         // Fall through to synthetic tone if playback fails.
@@ -60,12 +186,23 @@ function LandingPage() {
     }
   };
 
-  const openMainInvitation = () => {
+  const startBackgroundMusic = () => {
+    if (!musicRef.current) {
+      return;
+    }
+    if (musicRef.current.currentTime < MUSIC_LOOP_START_SECONDS) {
+      musicRef.current.currentTime = MUSIC_LOOP_START_SECONDS;
+    }
+    musicRef.current.muted = isMusicMuted;
+    musicRef.current.play().catch(() => {});
+  };
+
+  const handleEnterCelebration = () => {
     if (isEntering) {
       return;
     }
-
     playChimeIfAvailable();
+    startBackgroundMusic();
     setIsEntering(true);
     setTimeout(() => {
       setIsEntering(false);
@@ -73,87 +210,31 @@ function LandingPage() {
     }, 900);
   };
 
-  return (
-    <OpeningPrelude
-      opening={invitationData.opening}
-      onEnter={openMainInvitation}
-      isEntering={isEntering}
-    />
-  );
-}
-
-function InvitationPage() {
-  return (
-    <main className="main-invite-visible invitation-theme">
-      <Hero invitation={invitationData} />
-
-      <Countdown
-        targetDate={invitationData.ceremony.isoDate}
-        dateLabel={`${invitationData.ceremony.dateLabel} • ${invitationData.ceremony.timeLabel}`}
-      />
-
-      <AboutCouple couple={invitationData.couple} />
-
-      <EventsTimeline events={invitationData.events} />
-
-      <GallerySection items={invitationData.galleryPlaceholders} />
-      <StorySection story={invitationData.story} />
-      <WhenWhereSection ceremony={invitationData.ceremony} />
-      <ShareSection
-        shareText={invitationData.share.whatsappText}
-        coupleNames={`${invitationData.couple.bride.name} & ${invitationData.couple.groom.name}`}
-      />
-
-      <footer className="footer">
-        <p className="footer-text">{invitationData.footerMessage}</p>
-        <p className="footer-names">
-          {invitationData.couple.bride.name} &amp; {invitationData.couple.groom.name}
-        </p>
-      </footer>
-    </main>
-  );
-}
-
-function App() {
-  const location = useLocation();
-
-  useEffect(() => {
-    // Enable theme transitions after initial paint to prevent flash
-    const readyTimer = setTimeout(() => {
-      document.body.classList.add('theme-ready');
-    }, 100);
-
-    return () => clearTimeout(readyTimer);
-  }, []);
-
-  useEffect(() => {
-    if (location.pathname !== '/invitation') {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    const fadeElements = document.querySelectorAll('.fade-in');
-    fadeElements.forEach((el) => observer.observe(el));
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [location.pathname]);
+  const toggleMusicMute = () => {
+    setIsMusicMuted((prev) => {
+      const next = !prev;
+      if (!next && musicRef.current && musicRef.current.paused) {
+        musicRef.current.play().catch(() => {});
+      }
+      return next;
+    });
+  };
 
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/invitation" element={<InvitationPage />} />
+      <Route
+        path="/"
+        element={<LandingPage isEntering={isEntering} onEnter={handleEnterCelebration} />}
+      />
+      <Route
+        path="/invitation"
+        element={
+          <InvitationPage
+            isMusicMuted={isMusicMuted}
+            onToggleMusic={toggleMusicMute}
+          />
+        }
+      />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
