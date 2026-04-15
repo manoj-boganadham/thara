@@ -152,9 +152,9 @@
 .invitation-theme {
   position: relative;
   background:
-    radial-gradient(circle at 10% 14%, rgba(221, 165, 72, 0.16), transparent 26%),
-    radial-gradient(circle at 88% 82%, rgba(153, 44, 50, 0.26), transparent 34%),
-    linear-gradient(180deg, #4f0f1b 0%, #661821 45%, #7c2d1c 100%);
+    radial-gradient(circle at 10% 14%, rgba(212, 175, 55, 0.2), transparent 24%),
+    radial-gradient(circle at 88% 82%, rgba(212, 175, 55, 0.14), transparent 30%),
+    linear-gradient(180deg, #fff7eb 0%, #f7efe3 55%, #ead8be 100%);
 }
 
 .invitation-theme::before {
@@ -163,22 +163,42 @@
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(90deg, rgba(255, 232, 195, 0.04) 1px, transparent 1px),
-    linear-gradient(rgba(255, 232, 195, 0.04) 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.34;
+    linear-gradient(90deg, rgba(140, 90, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(140, 90, 0, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.22;
 }
 
 .invitation-theme .hero-overlay-bottom {
-  background: linear-gradient(to bottom, transparent, rgba(79, 15, 27, 0.92));
+  background: linear-gradient(to bottom, transparent, #f7efe3);
+}
+
+.invitation-theme .hero {
+  background:
+    radial-gradient(circle at 50% 14%, rgba(212, 175, 55, 0.2) 0%, transparent 42%),
+    linear-gradient(180deg, rgba(255, 247, 232, 0.96) 0%, rgba(246, 234, 213, 0.92) 100%);
+}
+
+.invitation-theme .hero-content {
+  color: #5f3417;
+  text-shadow: 0 1px 6px rgba(255, 245, 228, 0.5);
+}
+
+.invitation-theme .hero-subtitle,
+.invitation-theme .hero-ceremony-meta,
+.invitation-theme .hero-ceremony-venue,
+.invitation-theme .hero-quote,
+.invitation-theme .hero-intro,
+.invitation-theme .hero-invocation {
+  color: #6e4625;
 }
 
 .invitation-theme .invite-section,
 .invitation-theme .countdown-section,
 .invitation-theme .footer {
   background:
-    radial-gradient(circle at center top, rgba(255, 210, 124, 0.12), transparent 50%),
-    linear-gradient(180deg, rgba(94, 20, 28, 0.88) 0%, rgba(77, 15, 24, 0.88) 100%);
+    radial-gradient(circle at center top, rgba(212, 175, 55, 0.08), transparent 45%),
+    linear-gradient(180deg, rgba(255, 248, 236, 0.78) 0%, rgba(255, 245, 230, 0.58) 100%);
 }
 
 .invitation-theme .invite-section::before,
@@ -186,8 +206,8 @@
 .invitation-theme .footer::before {
   background: linear-gradient(
     180deg,
-    rgba(255, 226, 170, 0.12) 0%,
-    rgba(255, 226, 170, 0.02) 52%,
+    rgba(212, 175, 55, 0.04) 0%,
+    rgba(212, 175, 55, 0.01) 50%,
     transparent 100%
   );
 }
@@ -195,7 +215,7 @@
 .invitation-theme .invite-section::after,
 .invitation-theme .countdown-section::after,
 .invitation-theme .footer::after {
-  border-color: rgba(245, 194, 102, 0.45);
+  border-color: rgba(212, 175, 55, 0.25);
 }
 
 .invitation-theme .section-heading,
@@ -203,7 +223,7 @@
 .invitation-theme .couple-name,
 .invitation-theme .timeline-title,
 .invitation-theme .venue-title {
-  color: #fff2d8;
+  color: var(--text);
 }
 
 .invitation-theme .countdown-subtitle,
@@ -215,7 +235,7 @@
 .invitation-theme .share-footnote,
 .invitation-theme .footer-text,
 .invitation-theme .footer-names {
-  color: #f2d9b4;
+  color: var(--text-light);
 }
 
 .invitation-theme .countdown-box,
@@ -224,9 +244,9 @@
 .invitation-theme .story-card,
 .invitation-theme .venue-card {
   background:
-    linear-gradient(180deg, rgba(248, 227, 192, 0.95) 0%, rgba(233, 199, 151, 0.9) 100%);
-  border-color: rgba(186, 121, 57, 0.48);
-  box-shadow: 0 12px 30px rgba(31, 6, 10, 0.28);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 249, 240, 0.78) 100%);
+  border-color: var(--border);
+  box-shadow: var(--card-shadow);
 }
 
 .invitation-theme .countdown-label,
@@ -234,36 +254,36 @@
 .invitation-theme .story-text,
 .invitation-theme .couple-parent-text,
 .invitation-theme .venue-address {
-  color: #5f2e18;
+  color: var(--text-muted);
 }
 
 .invitation-theme .countdown-value {
-  color: #8f1f2e;
+  color: var(--accent);
 }
 
 .invitation-theme .timeline-subtitle {
-  color: #8f1f2e;
+  color: var(--accent);
 }
 
 .invitation-theme .gallery-tile {
-  border-color: rgba(247, 194, 107, 0.75);
-  background: linear-gradient(135deg, rgba(243, 222, 185, 0.95) 0%, rgba(224, 184, 131, 0.88) 100%);
-  color: #5e2e19;
+  border-color: rgba(212, 175, 55, 0.45);
+  background: linear-gradient(135deg, rgba(255, 249, 240, 0.9) 0%, rgba(250, 234, 205, 0.7) 100%);
+  color: var(--text-light);
 }
 
 .invitation-theme .location-btn,
 .invitation-theme .primary-btn {
-  background: linear-gradient(180deg, #d9a94a 0%, #b2711d 100%);
-  color: #fff8ea;
+  background: var(--accent);
+  color: #fff;
 }
 
 .invitation-theme .location-btn:hover,
 .invitation-theme .primary-btn:hover {
-  background: linear-gradient(180deg, #e3b75a 0%, #bc7a24 100%);
+  background: var(--accent-hover);
 }
 
 .invitation-theme .section-divider {
-  background: #f4c16a;
+  background: var(--accent);
 }
 
 /* ========== Mobile-First Refinements ========== */
@@ -423,6 +443,9 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255, 219, 154, 0.18) 0%, transparent 40%),
+    linear-gradient(180deg, rgba(111, 24, 32, 0.92) 0%, rgba(79, 15, 27, 0.95) 100%);
 }
 
 .hero-overlay-bottom {

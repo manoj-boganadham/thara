@@ -1,11 +1,8 @@
-import DayCycleScene from './DayCycleScene';
-
 function Hero({ invitation }) {
   const { invocation, couple, quote, ceremony } = invitation;
 
   return (
     <section className="hero" id="hero">
-      <DayCycleScene />
       <div className="hero-content">
         <p className="hero-invocation">{invocation}</p>
         <p className="hero-intro">Together with the blessings of our families</p>
