@@ -16,22 +16,23 @@ const invitationData = {
   couple: {
     bride: {
       name: 'Varsha',
-      fullName: 'Varsha',
-      parents: 'Daughter of Mr. and Mrs. Family Name',
+      fullName: 'Chi.La.Sow. Varsha',
+      parents:
+        '(Only D/o Sri. Sarikonda Srinivas — Late Anusha, Hyderabad)',
     },
     groom: {
       name: 'Rithvik',
-      fullName: 'Rithvik',
-      parents: 'Son of Mr. and Mrs. Family Name',
+      fullName: 'Chi. Sai Rithvik Reddy',
+      parents: '(Late Alkanti Venkat Reddy — Kalyani\'s Eldest Son)',
     },
   },
   ceremony: {
     title: 'Wedding Ceremony',
     dateLabel: 'Friday, May 1, 2026',
-    timeLabel: '11:20 AM',
+    timeLabel: '11:22 AM',
     venueLabel: 'Naina Conventions, Kukatpally, Hyderabad, Telangana',
     mapsQuery: 'Naina Conventions, Kukatpally, Hyderabad, Telangana',
-    isoDate: '2026-05-01T11:20:00+05:30',
+    isoDate: '2026-05-01T11:22:00+05:30',
   },
   events: [
     {
@@ -39,7 +40,7 @@ const invitationData = {
       title: 'Muhurtham',
       subtitle: 'Wedding Ceremony',
       date: 'Friday, May 1, 2026',
-      time: '11:20 AM',
+      time: '11:22 AM',
       venue: 'Naina Conventions, Kukatpally, Hyderabad, Telangana',
       mapsQuery: 'Naina Conventions, Kukatpally, Hyderabad, Telangana',
     },

@@ -437,6 +437,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  background-image: url('./assets/hero-component-background.jpeg');
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -485,13 +486,6 @@
   font-size: 0.98rem;
   line-height: 1.55;
   color: #6b3f1d;
-}
-
-.hero-ceremony-meta {
-  margin-top: 0.5rem;
-  line-height: 1.55;
-  font-size: 0.9rem;
-  color: #7a4a24;
 }
 
 .scroll-hint {
@@ -1100,7 +1094,7 @@
 /* ========== Responsive ========== */
 @media (min-width: 640px) {
   .hero-content {
-    margin-top: 0;
+    margin-top: 6vh;
     padding: 0.8rem 1rem;
   }
 
@@ -1167,15 +1161,24 @@
     font-size: 1.08rem;
   }
 
-  .hero-ceremony-meta {
-    font-size: 1rem;
-  }
-
   .music-toggle-fab {
     right: 1.2rem;
     bottom: calc(1.2rem + env(safe-area-inset-bottom));
     width: 50px;
     height: 50px;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero {
+    background-image: url('./assets/laptop-hero-background.jpeg');
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .hero-content {
+    margin-top: 9vh;
   }
 }
 
