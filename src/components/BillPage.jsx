@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 
 const SECRET_ANSWER = 'saichand';
-const TARGET_TOTAL = 150000;
+const TARGET_TOTAL = 175000;
 
 const BILL_ITEMS = [
   { label: 'Friends Tax (Annual)', amount: 12500 },
   { label: 'Late Reply Penalty', amount: 3800 },
   { label: 'Unlimited Advice Service', amount: 5200 },
-  { label: 'Mood Swing Handling Charges', amount: 12200 },
+  { label: 'Mood Swing Handling Charges', amount: 22200 },
   { label: 'Listening to Random Stories (Unlimited Plan)', amount: 14800 },
   { label: 'Typing... Waiting Compensation', amount: 9100 },
   { label: '"I\'m fine" Investigation Cost', amount: 17600 },
@@ -28,7 +28,7 @@ function BillPage() {
   const totals = useMemo(() => {
     const subtotal = BILL_ITEMS.reduce((sum, item) => sum + item.amount, 0);
     const friendshipHandlingFee = Math.round(subtotal * 0.18);
-    const gowthamEmotionalDamageFee = 7500;
+    const gowthamEmotionalDamageFee = 17500;
     const runningTotal = subtotal + friendshipHandlingFee + gowthamEmotionalDamageFee;
     const roundOff = Math.max(0, TARGET_TOTAL - runningTotal);
     const grandTotal = runningTotal + roundOff;
