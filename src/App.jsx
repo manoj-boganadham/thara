@@ -9,6 +9,7 @@ import WhenWhereSection from './components/WhenWhereSection';
 import ShareSection from './components/ShareSection';
 import OpeningPrelude from './components/OpeningPrelude';
 import MusicToggle from './components/MusicToggle';
+import BillPage from './components/BillPage';
 import backgroundMusic from './assets/background-music.mp3';
 import invitationData from './data/invitationData';
 import './App.css';
@@ -238,6 +239,7 @@ function App() {
           />
         }
       />
+      <Route path="/bill" element={<BillPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
