@@ -4,7 +4,6 @@ import Hero from './components/Hero';
 import Countdown from './components/Countdown';
 import AboutCouple from './components/AboutCouple';
 import EventsTimeline from './components/EventsTimeline';
-import GallerySection from './components/GallerySection';
 import StorySection from './components/StorySection';
 import WhenWhereSection from './components/WhenWhereSection';
 import ShareSection from './components/ShareSection';
@@ -48,7 +47,6 @@ function InvitationPage({ isMusicMuted, onToggleMusic }) {
 
       <EventsTimeline events={invitationData.events} />
 
-      <GallerySection />
       <StorySection story={invitationData.story} />
       <WhenWhereSection ceremony={invitationData.ceremony} />
       <ShareSection
@@ -149,6 +147,7 @@ function App() {
     }
 
     musicRef.current.pause();
+    musicRef.current.currentTime = MUSIC_LOOP_START_SECONDS;
   }, [location.pathname]);
 
   const playChimeIfAvailable = () => {
