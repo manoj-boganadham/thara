@@ -111,7 +111,7 @@ function BillPage() {
                 <strong>{formatCurrency(totals.gowthamEmotionalDamageFee)}</strong>
               </div>
               <div className="bill-row">
-                <span>Round Off (to Rs. 1,50,000)</span>
+                <span>Round Off (to Rs. 1,75,000)</span>
                 <strong>{formatCurrency(totals.roundOff)}</strong>
               </div>
             </div>
