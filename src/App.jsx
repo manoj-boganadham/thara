@@ -13,7 +13,6 @@ import backgroundMusic from './assets/background-music.mp3';
 import invitationData from './data/invitationData';
 import './App.css';
 
-const MUSIC_MUTED_STORAGE_KEY = 'musicMuted';
 const MUSIC_LOOP_START_SECONDS = 21;
 
 function LandingPage({ isEntering, onEnter }) {
@@ -70,9 +69,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isEntering, setIsEntering] = useState(false);
-  const [isMusicMuted, setIsMusicMuted] = useState(() => {
-    return localStorage.getItem(MUSIC_MUTED_STORAGE_KEY) === 'true';
-  });
+  const [isMusicMuted, setIsMusicMuted] = useState(false);
   const musicRef = useRef(null);
   const chimeAudioRef = useRef(null);
 
@@ -138,7 +135,6 @@ function App() {
       return;
     }
     musicRef.current.muted = isMusicMuted;
-    localStorage.setItem(MUSIC_MUTED_STORAGE_KEY, String(isMusicMuted));
   }, [isMusicMuted]);
 
   useEffect(() => {
