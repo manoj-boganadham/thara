@@ -143,6 +143,14 @@ function App() {
     localStorage.setItem(MUSIC_MUTED_STORAGE_KEY, String(isMusicMuted));
   }, [isMusicMuted]);
 
+  useEffect(() => {
+    if (location.pathname === '/invitation' || !musicRef.current) {
+      return;
+    }
+
+    musicRef.current.pause();
+  }, [location.pathname]);
+
   const playChimeIfAvailable = () => {
     const source = invitationData.opening.chimeSrc;
 
