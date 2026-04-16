@@ -48,7 +48,7 @@ function InvitationPage({ isMusicMuted, onToggleMusic }) {
 
       <EventsTimeline events={invitationData.events} />
 
-      <GallerySection items={invitationData.galleryPlaceholders} />
+      <GallerySection />
       <StorySection story={invitationData.story} />
       <WhenWhereSection ceremony={invitationData.ceremony} />
       <ShareSection

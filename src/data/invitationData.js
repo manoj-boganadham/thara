@@ -58,12 +58,6 @@ const invitationData = {
     'From conversations to companionship, every chapter brought us closer.',
     'With our families blessings, we are stepping into a new beginning and would be honored to celebrate this joy with you.',
   ],
-  galleryPlaceholders: [
-    'Engagement Moments',
-    'Family Blessings',
-    'Wedding Preparations',
-    'Celebration Memories',
-  ],
   share: {
     whatsappText:
       'You are invited to celebrate the wedding of Varsha & Rithvik. We would love to have you with us.',
