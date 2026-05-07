@@ -47,7 +47,7 @@ function InvitationPage({ isMusicMuted, onToggleMusic }) {
 
       <EventsTimeline events={invitationData.events} />
 
-      <StorySection story={invitationData.story} />
+      {/* <StorySection story={invitationData.story} /> */}
       <WhenWhereSection ceremony={invitationData.ceremony} />
       <ShareSection
         shareText={invitationData.share.whatsappText}
