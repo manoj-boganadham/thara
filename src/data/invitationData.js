@@ -61,15 +61,6 @@ const invitationData = {
       venue: 'NMS Kalyanamandapam, Mydukur Road, Badvel',
       mapsQuery: 'NMS Kalyanamandapam, Mydukur Road, Badvel',
     },
-    {
-      id: 'mdvrm reception',
-      title: 'Reception & Dinner',
-      subtitle: 'Celebration Evening',
-      date: 'Sunday, July 05, 2026',
-      time: '07:00 PM',
-      venue: 'Kanaka Durga Kalyana Mandapam, Kadapa',
-      mapsQuery: 'Kanaka Durga Kalyana Mandapam, Kadapa',
-    },
   ],
   share: {
     whatsappText:
