@@ -1,4 +1,4 @@
-# Varsha & Rithvik Wedding Invitation
+# Tharuni & Rahul Wedding Invitation
 
 An interactive single-page wedding invitation built with React and Vite.
 
